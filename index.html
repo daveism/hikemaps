@@ -11,6 +11,19 @@
     <!--[if lt IE 9]>
     <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
+    <script>
+      map.locate({setView: true, maxZoom: 15});
+        /** bind the locationfound event to the function onLocationFound()
+            in other words, tell Leaflet what to do once locate() is successful 
+        **/
+        map.on('locationfound', onLocationFound);
+         
+        function onLocationFound(e) {
+            // create a marker at the users "latlng" and add it to the map
+            L.marker(e.latlng).addTo(mymap);
+        }
+ 
+    </script>
   </head>
   <body>
 <iframe width='100%' height='100%' frameBorder='0' src='https://a.tiles.mapbox.com/v4/daveism.m2o8aakg/attribution,zoompan,zoomwheel,geocoder,share.html?access_token=pk.eyJ1IjoiZGF2ZWlzbSIsImEiOiJCdjUxT0FzIn0.V9oIk_wUc4uZu7UBblR8mw'></iframe>
