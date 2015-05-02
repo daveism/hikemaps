@@ -57,7 +57,7 @@
         geolocate.innerHTML = 'Geolocation is not available';
     } else {
         geolocate.onclick = function (e) {
-             geolocate.innerHTML = 'test';
+           alert("Hello! I am an alert box!!");
             e.preventDefault();
             e.stopPropagation();
             map.locate();
