@@ -8,7 +8,7 @@
 <link href='https://api.tiles.mapbox.com/mapbox.js/v2.1.9/mapbox.css' rel='stylesheet' />
 <style>
   body { margin:0; padding:0; }
-  #map { position:absolute; top:0; bottom:0; width:100%; height:600px; }
+  #map{height: 600px;}
 </style>
 </head>
 <body>
@@ -37,11 +37,11 @@
 <a href='#' id='geolocate' class='ui-button'>Find me</a>
 
 <script>
-L.mapbox.accessToken = 'pk.eyJ1IjoiZGF2ZWlzbSIsImEiOiJCdjUxT0FzIn0.V9oIk_wUc4uZu7UBblR8mw';
-var geolocate = document.getElementById('geolocate');
-var map = L.mapbox.map('map', 'daveism.m2o8aakg');
-
-var myLayer = L.mapbox.featureLayer().addTo(map);
+    L.mapbox.accessToken = 'pk.eyJ1IjoiZGF2ZWlzbSIsImEiOiJCdjUxT0FzIn0.V9oIk_wUc4uZu7UBblR8mw';
+    var geolocate = document.getElementById('geolocate');
+    // Create a map in the div #map
+    L.mapbox.map('map', 'daveism.m2o8aakg');
+    var myLayer = L.mapbox.featureLayer().addTo(map);
 
 // This uses the HTML5 geolocation API, which is available on
 // most mobile browsers and modern browsers, but not in Internet Explorer
