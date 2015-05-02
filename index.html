@@ -14,22 +14,79 @@
     <!--[if lt IE 9]>
     <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
-<style type="text/css"><!--
-#map{height: 600px;}
---></style>
- 
+    <style type="text/css">
+    #map{height: 600px;}
+    </style>
+ <style>
+.ui-button {
+  background:#3887BE;
+  color:#FFF;
+  display:block;
+  position:absolute;
+  top:50%;left:50%;
+  width:160px;
+  margin:-20px 0 0 -80px;
+  z-index:100;
+  text-align:center;
+  padding:10px;
+  border:1px solid rgba(0,0,0,0.4);
+  border-radius:3px;
+  }
+  .ui-button:hover {
+    background:#3074a4;
+    color:#fff;
+    }
+</style>
+
   </head>
   <body> 
    <div id='map'></div>
-  <!--
-  <iframe width='100%' height='800px' frameBorder='0' src='https://a.tiles.mapbox.com/v4/daveism.m2o8aakg/attribution,zoompan,zoomwheel,geocoder,share.html?access_token=pk.eyJ1IjoiZGF2ZWlzbSIsImEiOiJCdjUxT0FzIn0.V9oIk_wUc4uZu7UBblR8mw'></iframe>
-  -->
-<script>
-// Provide your access token
-L.mapbox.accessToken = 'pk.eyJ1IjoiZGF2ZWlzbSIsImEiOiJCdjUxT0FzIn0.V9oIk_wUc4uZu7UBblR8mw';
-// Create a map in the div #map
-L.mapbox.map('map', 'daveism.m2o8aakg');
-</script>
+   <a href='#' id='geolocate' class='ui-button'>Find me</a>
 
-    </script>  
+    <script>
+    // Provide your access token
+    L.mapbox.accessToken = 'pk.eyJ1IjoiZGF2ZWlzbSIsImEiOiJCdjUxT0FzIn0.V9oIk_wUc4uZu7UBblR8mw';
+    var geolocate = document.getElementById('geolocate');
+
+    // Create a map in the div #map
+    L.mapbox.map('map', 'daveism.m2o8aakg');
+    var myLayer = L.mapbox.featureLayer().addTo(map)
+    
+    if (!navigator.geolocation) {
+        geolocate.innerHTML = 'Geolocation is not available';
+    } else {
+        geolocate.onclick = function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+            map.locate();
+        };
+    }
+    // on it, and add a single marker.
+    map.on('locationfound', function(e) {
+        map.fitBounds(e.bounds);
+    
+        myLayer.setGeoJSON({
+            type: 'Feature',
+            geometry: {
+                type: 'Point',
+                coordinates: [e.latlng.lng, e.latlng.lat]
+            },
+            properties: {
+                'title': 'Here I am!',
+                'marker-color': '#ff8888',
+                'marker-symbol': 'star'
+            }
+        });
+    
+        // And hide the geolocation button
+        geolocate.parentNode.removeChild(geolocate);
+    });
+    
+    // If the user chooses not to allow their location
+    // to be shared, display an error message.
+    map.on('locationerror', function() {
+        geolocate.innerHTML = 'Position could not be found';
+    });
+    </script>
+
 </html>
