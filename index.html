@@ -44,11 +44,21 @@
 
 <div id='map'></div>
 <a href='#' id='geolocate' class='ui-button'>Find me</a>
+<!--
+   <div id='map'></div>
+   <a href='#' id='geolocate' class='ui-button'>Find me</a>
 
+    <script>
+    // Provide your access token
+    L.mapbox.accessToken = 'pk.eyJ1IjoiZGF2ZWlzbSIsImEiOiJCdjUxT0FzIn0.V9oIk_wUc4uZu7UBblR8mw';
+    var geolocate = document.getElementById('geolocate');
+    // Create a map in the div #map
+    L.mapbox.map('map', 'daveism.m2o8aakg');
+    -->
 <script>
 L.mapbox.accessToken = 'pk.eyJ1IjoiZGF2ZWlzbSIsImEiOiJCdjUxT0FzIn0.V9oIk_wUc4uZu7UBblR8mw';
 var geolocate = document.getElementById('geolocate');
-var map = L.mapbox.map('map', 'examples.map-i86nkdio');
+var map = L.mapbox.map('map', 'daveism.m2o8aakg');
 
  var myLayer = L.mapbox.featureLayer().addTo(map);
 
