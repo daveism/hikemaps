@@ -27,7 +27,7 @@
   color:#FFF;
   display:block;
   position:absolute;
-  top:50%;left:50%;
+  top:10%;left:10%;
   width:160px;
   margin:-20px 0 0 -80px;
   z-index:100;
@@ -57,6 +57,7 @@
         geolocate.innerHTML = 'Geolocation is not available';
     } else {
         geolocate.onclick = function (e) {
+             geolocate.innerHTML = 'test';
             e.preventDefault();
             e.stopPropagation();
             map.locate();
