@@ -8,10 +8,38 @@
     <link rel="stylesheet" href="stylesheets/styles.css">
     <link rel="stylesheet" href="stylesheets/pygment_trac.css">
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+  <!-- leaflet js/css -->
+ <script src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
+ <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css" />
+    
     <!--[if lt IE 9]>
     <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
+
   </head>
   <body> 
-<iframe width='100%' height='800px' frameBorder='0' src='https://a.tiles.mapbox.com/v4/daveism.m2o8aakg/attribution,zoompan,zoomwheel,geocoder,share.html?access_token=pk.eyJ1IjoiZGF2ZWlzbSIsImEiOiJCdjUxT0FzIn0.V9oIk_wUc4uZu7UBblR8mw'></iframe>
+   <div id='map'></div>
+  <!--
+  <iframe width='100%' height='800px' frameBorder='0' src='https://a.tiles.mapbox.com/v4/daveism.m2o8aakg/attribution,zoompan,zoomwheel,geocoder,share.html?access_token=pk.eyJ1IjoiZGF2ZWlzbSIsImEiOiJCdjUxT0FzIn0.V9oIk_wUc4uZu7UBblR8mw'></iframe>
+  -->
+    <script>
+    
+    var map = L.map('map').setView([35.8334, -82.9194], 15);
+    L.tileLayer('http://api.tiles.mapbox.com/v4/daveism.m2o8aakg/{z}/{x}/{y}.png', {
+      attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>;Loops by YonderHub',
+      maxZoom: 18
+    }).addTo(map);
+    map.locate({setView: true, maxZoom: 15});
+/** bind the locationfound event to the function onLocationFound()
+    in other words, tell Leaflet what to do once locate() is successful 
+**/
+map.on('locationfound', onLocationFound);
+
+function onLocationFound(e) {
+    // create a marker at the users "latlng" and add it to the map
+    L.marker(e.latlng).addTo(mymap);
+}
+
+
+    </script>  
 </html>
